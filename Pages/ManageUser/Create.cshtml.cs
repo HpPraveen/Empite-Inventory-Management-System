@@ -24,9 +24,15 @@ namespace InventoryManagementSystem.Pages.ManageUser
         }
 
         [BindProperty]
-        public ApplicationUserDetails ApplicationUsers { get; set; }
+        public IdentityRole IdentityRole { get; set; }
 
-        public IActionResult OnGetSubmit(string name, string email, string password)
+        public IActionResult OnGet()
+        {
+            ViewData["Roles"] = new SelectList(_context.Roles, "Id", "Name");
+            return Page();
+        }
+
+        public IActionResult OnGetSubmit(string name, string email, string password, string role)
         {
             //if (_context.Roles.Any(x => x.Name == "Admin"))
             //{
@@ -44,14 +50,15 @@ namespace InventoryManagementSystem.Pages.ManageUser
                 EmailConfirmed = true,
                 PasswordHash = password,
             };
-
             var userStore = new UserStore<IdentityUser>(_context);
-            var userRole = new IdentityUserRole<string>();
-            userRole.RoleId = "1";
-            userRole.UserId = user.Id;
-
             userStore.CreateAsync(user);
-            _context.UserRoles.Add(userRole);
+
+            var userRole = new IdentityUserRole<string>
+            {
+                RoleId = role,
+                UserId = user.Id
+            };
+            _context.UserRoles.AddAsync(userRole);
             _context.SaveChangesAsync();
 
             bool isSaved = false;

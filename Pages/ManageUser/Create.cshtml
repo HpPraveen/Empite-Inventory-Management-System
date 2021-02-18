@@ -11,6 +11,7 @@
 <div id="vueApp" class="row">
     <div class="col-md-4">
         <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">Name</label>
                 <input type="text" id="username" class="form-control" />
@@ -22,6 +23,10 @@
             <div class="form-group">
                 <label class="control-label">Password</label>
                 <input type="password" id="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Role</label>
+                <select asp-for="IdentityRole.Id" class="form-control" asp-items="ViewBag.Roles" id="role"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" v-on:click="createUser" />
@@ -49,18 +54,21 @@
                     var uName = "";
                     var uMail = "";
                     var uPassword = "";
+                    var uRole = "";
+                    debugger
                     uName = document.getElementById("username").value;
                     uMail = document.getElementById("mail").value;
                     uPassword = document.getElementById("password").value;
+                    uRole = document.getElementById("role").value;
 
-                    if (uName === "" || uMail === "" || uPassword === "" || uName === null || uMail === null || uPassword === null) {
+                    if (uName === "" || uMail === "" || uPassword === "" || uRole === "" || uName === null || uMail === null || uPassword === null || uRole === null) {
                         alert("Please fill all the fields");
                     }
                     else {
                         $.ajax({
                             type: 'GET',
                             url: '?handler=Submit',
-                            data: { name: uName, email: uMail, password: uPassword },
+                            data: { name: uName, email: uMail, password: uPassword, role: uRole },
                             dataType: 'json',
                             success: function (data) {
                                 if (data == false) {
