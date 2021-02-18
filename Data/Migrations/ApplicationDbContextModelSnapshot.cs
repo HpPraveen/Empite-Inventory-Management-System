@@ -30,10 +30,10 @@ namespace InventoryManagementSystem.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("ItemPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 6)");
 
-                    b.Property<decimal>("ItemQty")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<long>("ItemQty")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("MerchantId")
                         .HasColumnType("bigint");
