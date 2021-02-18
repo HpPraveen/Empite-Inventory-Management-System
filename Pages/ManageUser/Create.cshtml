@@ -36,7 +36,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to user list</a>
+    <a asp-page="Index">View user list</a>
 </div>
 
 @section Scripts {
@@ -55,7 +55,6 @@
                     var uMail = "";
                     var uPassword = "";
                     var uRole = "";
-                    debugger
                     uName = document.getElementById("username").value;
                     uMail = document.getElementById("mail").value;
                     uPassword = document.getElementById("password").value;
@@ -71,7 +70,7 @@
                             data: { name: uName, email: uMail, password: uPassword, role: uRole },
                             dataType: 'json',
                             success: function (data) {
-                                if (data == false) {
+                                if (data == true) {
                                     alert("Successfully created new user");
                                 }
                                 else {

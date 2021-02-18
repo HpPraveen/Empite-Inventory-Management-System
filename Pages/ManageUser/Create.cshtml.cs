@@ -10,6 +10,7 @@ using InventoryManagementSystem.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNet.Identity;
+using System.Threading;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
@@ -50,6 +51,9 @@ namespace InventoryManagementSystem.Pages.ManageUser
                 EmailConfirmed = true,
                 PasswordHash = password,
             };
+
+            Task.Delay(100000000);
+
             var userStore = new UserStore<IdentityUser>(_context);
             userStore.CreateAsync(user);
 
