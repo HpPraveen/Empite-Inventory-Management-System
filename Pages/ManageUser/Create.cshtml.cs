@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNet.Identity;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
@@ -22,18 +24,37 @@ namespace InventoryManagementSystem.Pages.ManageUser
         }
 
         [BindProperty]
-        public ApplicationUser ApplicationUsers { get; set; }
+        public ApplicationUserDetails ApplicationUsers { get; set; }
 
-        public IActionResult OnGetSubmit(string username, string email, string password)
+        public IActionResult OnGetSubmit(string name, string email, string password)
         {
-            var user = new ApplicationUser
+            //if (_context.Roles.Any(x => x.Name == "Admin"))
+            //{
+            //    _context.Roles.Add(new IdentityRole("Viewer"));
+            //    _context.SaveChanges();
+            //}
+
+            var user = new ApplicationUserDetails
             {
-                FirstName = username,
-                LasstName = username,
+                Name = name,
+                UserName = email,
+                NormalizedUserName = email,
+                Email = email,
+                NormalizedEmail = email,
+                EmailConfirmed = true,
+                PasswordHash = password,
             };
-            bool isSaved = false;
-            _context.Users.Add(user);
+
+            var userStore = new UserStore<IdentityUser>(_context);
+            var userRole = new IdentityUserRole<string>();
+            userRole.RoleId = "1";
+            userRole.UserId = user.Id;
+
+            userStore.CreateAsync(user);
+            _context.UserRoles.Add(userRole);
             _context.SaveChangesAsync();
+
+            bool isSaved = false;
 
             return new JsonResult(isSaved);
         }

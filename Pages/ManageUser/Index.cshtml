@@ -37,8 +37,8 @@
                             var username = users.userName;
                             $("#itemList1").append("<li>" +
                                 "<p class='sc-name'>" + username + "</p>" +
-                                " <input type='submit' value='Disable user' style='background-color:green' class='btn btn - primary' />" +
-                                "<br></li>");
+                                " <input type='submit' value='Disable user' style='background-color:green' class='btn btn - primary' v-on:click='disableUser' />" +
+                                "<hr></li>");
 
                         }
 
@@ -52,7 +52,11 @@
             data: {
 
             }, methods: {
+                disableUser: function (e) {
+                    debugger;
+                    var uName = "";
 
+                }
             }
         });
     </script>

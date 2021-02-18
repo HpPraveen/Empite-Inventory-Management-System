@@ -6,14 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNet.Identity.Samples" Version="1.0.2" />
     <PackageReference Include="MailKit" Version="2.10.1" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="5.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
-
 </Project>
