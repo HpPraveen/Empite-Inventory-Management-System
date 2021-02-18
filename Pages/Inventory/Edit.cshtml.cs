@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.Inventory
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class EditModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;

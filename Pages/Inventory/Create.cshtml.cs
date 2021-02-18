@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.Inventory
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class CreateModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;

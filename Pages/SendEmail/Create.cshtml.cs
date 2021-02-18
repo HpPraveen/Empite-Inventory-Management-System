@@ -9,9 +9,11 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using MailKit.Security;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.SendEmail
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class CreateModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;
