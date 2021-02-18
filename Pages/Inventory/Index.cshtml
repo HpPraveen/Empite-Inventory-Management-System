@@ -1,0 +1,56 @@
+﻿@page
+@model InventoryManagementSystem.Pages.Inventory.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Inventory Item List</h1>
+
+<p>
+    <a asp-page="Create">Create New Item</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Merchant Name
+            </th>
+            <th>
+                Item Name
+            </th>
+            <th>
+                Item Price
+            </th>
+            <th>
+                Item Qty
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.InventoryDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MerchantDetails.MerchantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemQty)
+                </td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ItemId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ItemId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ItemId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

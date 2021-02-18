@@ -1,0 +1,58 @@
+﻿@page
+@model InventoryManagementSystem.Pages.SendEmail.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Send Inventory Mail</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MerchantDetails.MerchantId" class="control-label">Merchant</label>
+                <select asp-for="MerchantDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName" name="merchant"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MerchantDetails.MerchantEmail" class="control-label">To Email</label>
+                <input class="form-control" type="email" id="toEmail" name="toEmail" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@if (TempData["ErrorMessage"] != null)
+{
+    <span style="color:Red;">  @TempData["ErrorMessage"] </span>
+}@if (TempData["SuccessMessage"] != null)
+{
+    <span style="color:green;">  @TempData["SuccessMessage"] </span>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('select[name="merchant"]').change(function () {
+            var val = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '?handler=FindUser',
+                data: { merchantId: val },
+                dataType: 'json',
+                success: function (data) {
+                    document.getElementById('toEmail').value = data;
+                },
+                error: function (error) {
+                    alert("Error: " + error);
+                }
+            })
+        });
+    </script>
+}
