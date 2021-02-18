@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.SendEmail
 {
-    [Authorize(Roles = "Admin, Manager")]
+    //[Authorize(Roles = "Admin, Manager")]
     public class CreateModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;
