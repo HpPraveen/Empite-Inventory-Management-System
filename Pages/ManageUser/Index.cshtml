@@ -1,0 +1,88 @@
+﻿@page
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<div id="vueApp" class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Username
+                </th>
+
+                <th>
+                    <input class="form-control" type="email" id="toEmail" name="toEmail" v-on:change="merchantChanged" />
+                </th>
+            </tr>
+        </thead>
+        @*<tbody>
+                @foreach (var item in Model.InventoryDetails)
+                {
+                    <tr>
+                        <td>
+                            fffffff
+                        </td>
+
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.ItemId">Edit</a> |
+                            <a asp-page="./Details" asp-route-id="@item.ItemId">Details</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.ItemId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>*@
+    </table>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js" asp-append-version="true"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#vueApp',
+            beforeMount() {
+                $.ajax({
+                    type: 'GET',
+                    url: '?handler=FindUser',
+                    data: { merchantId: 1 },
+                    dataType: 'json',
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (error) {
+                        alert("Error: " + error);
+                    }
+                })
+            },
+
+            data: {
+
+            }, methods: {
+                merchantChanged: function (e) {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '?handler=FindEmail',
+                        data: { merchantId: 1 },
+                        dataType: 'json',
+                        success: function (data) {
+                            alert(data);
+                        },
+                        error: function (error) {
+                            alert("Error: " + error);
+                        }
+                    })
+                }
+            }
+        });
+    </script>
+}

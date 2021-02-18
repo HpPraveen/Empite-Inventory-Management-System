@@ -66,7 +66,7 @@ namespace InventoryManagementSystem.Pages.SendEmail
             return RedirectToPage("./Create");
         }
 
-        public IActionResult OnGetFindUser(int merchantId)
+        public IActionResult OnGetFindEmail(int merchantId)
         {
             var merchantEmail = _context.MerchantDetails.Where(i => i.MerchantId == merchantId).FirstOrDefault().MerchantEmail;
             ViewData["MerchantsEmail"] = merchantEmail;

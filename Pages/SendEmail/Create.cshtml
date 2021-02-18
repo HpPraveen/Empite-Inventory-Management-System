@@ -46,12 +46,12 @@
 
             data: {},
             methods: {
-                merchantChanged: function () {
-                    var val = 1;
+                merchantChanged: function (e) {
+                    var selectedMerchantId = e.target.value;
                     $.ajax({
                         type: 'GET',
-                        url: '?handler=FindUser',
-                        data: { merchantId: val },
+                        url: '?handler=FindEmail',
+                        data: { merchantId: selectedMerchantId },
                         dataType: 'json',
                         success: function (data) {
                             document.getElementById('toEmail').value = data;
