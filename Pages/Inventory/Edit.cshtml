@@ -16,16 +16,19 @@
             <div class="form-group">
                 <label asp-for="InventoryDetails.MerchantId" class="control-label">Merchant</label>
                 <select asp-for="InventoryDetails.MerchantId" class="form-control" asp-items="ViewBag.Merchants" disabled></select>
+                <input asp-for="InventoryDetails.MerchantId" class="form-control" hidden />
                 <span asp-validation-for="InventoryDetails.MerchantId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InventoryDetails.ItemName" class="control-label">Item Name</label>
                 <input asp-for="InventoryDetails.ItemName" class="form-control" disabled />
+                <input asp-for="InventoryDetails.ItemName" class="form-control" hidden />
                 <span asp-validation-for="InventoryDetails.ItemName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="InventoryDetails.ItemPrice" class="control-label">Item Price</label>
                 <input asp-for="InventoryDetails.ItemPrice" class="form-control" disabled />
+                <input asp-for="InventoryDetails.ItemPrice" class="form-control" hidden />
                 <span asp-validation-for="InventoryDetails.ItemPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
