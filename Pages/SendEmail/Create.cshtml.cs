@@ -158,18 +158,17 @@ namespace InventoryManagementSystem.Pages.SendEmail
             {
                 MimeMessage message = new MimeMessage();
 
-                MailboxAddress from = new MailboxAddress("from", fromMail);
+                MailboxAddress from = new MailboxAddress("Empite", fromMail);
                 message.From.Add(from);
 
-                MailboxAddress to = new MailboxAddress("to", toEmail);
+                MailboxAddress to = new MailboxAddress("Merchant", toEmail);
                 message.To.Add(to);
 
                 message.Subject = "Inventory Summary Report";
 
                 BodyBuilder bodyBuilder = new BodyBuilder
                 {
-                    HtmlBody = htmlString,
-                    TextBody = "Hello World!"
+                    HtmlBody = htmlString
                 };
 
                 message.Body = bodyBuilder.ToMessageBody();
