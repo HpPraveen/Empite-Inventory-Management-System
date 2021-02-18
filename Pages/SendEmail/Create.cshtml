@@ -8,13 +8,13 @@
 <h1>Send Inventory Mail</h1>
 
 <hr />
-<div class="row">
+<div id="vueApp" class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MerchantDetails.MerchantId" class="control-label">Merchant</label>
-                <select asp-for="MerchantDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName" name="merchant"></select>
+                <select asp-for="MerchantDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName" name="merchant" v-on:change="merchantChanged"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MerchantDetails.MerchantEmail" class="control-label">To Email</label>
@@ -38,21 +38,30 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js" asp-append-version="true"></script>
+
     <script>
-        $('select[name="merchant"]').change(function () {
-            var val = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: '?handler=FindUser',
-                data: { merchantId: val },
-                dataType: 'json',
-                success: function (data) {
-                    document.getElementById('toEmail').value = data;
-                },
-                error: function (error) {
-                    alert("Error: " + error);
+        var app = new Vue({
+            el: '#vueApp',
+
+            data: {},
+            methods: {
+                merchantChanged: function () {
+                    var val = 1;
+                    $.ajax({
+                        type: 'GET',
+                        url: '?handler=FindUser',
+                        data: { merchantId: val },
+                        dataType: 'json',
+                        success: function (data) {
+                            document.getElementById('toEmail').value = data;
+                        },
+                        error: function (error) {
+                            alert("Error: " + error);
+                        }
+                    })
                 }
-            })
+            }
         });
     </script>
 }
