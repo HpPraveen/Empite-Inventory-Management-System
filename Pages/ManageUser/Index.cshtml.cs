@@ -19,13 +19,7 @@ namespace InventoryManagementSystem.Pages.ManageUser
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            var userDetails = _context.Users.Where(u => u.EmailConfirmed == true).ToList();
-            return Page();
-        }
-
-        public IActionResult OnGetFindUser(int merchantId)
+        public IActionResult OnGetFindUser()
         {
             var userDetails = _context.Users.Where(u => u.EmailConfirmed == true).ToList();
 

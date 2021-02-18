@@ -19,26 +19,12 @@ namespace InventoryManagementSystem.Pages.ManageUser
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGetSubmit(string username, string email, string password)
         {
-            ViewData["MerchantId"] = new SelectList(_context.MerchantDetails, "MerchantId", "MerchantId");
-            return Page();
-        }
+            bool isSaved = false;
+            var userDetails = _context.Users.Where(u => u.EmailConfirmed == true).ToList();
 
-        [BindProperty]
-        public InventoryDetails InventoryDetails { get; set; }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.InventoryDetails.Add(InventoryDetails);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            return new JsonResult(isSaved);
         }
     }
 }

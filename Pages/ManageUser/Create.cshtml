@@ -8,7 +8,7 @@
 <h1>Create User</h1>
 
 <hr />
-<div class="row">
+<div id="vueApp" class="row">
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
@@ -24,16 +24,60 @@
                 <input type="password" id="password" class="form-control" />
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" v-on:click="createUser" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Back to user list</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js" asp-append-version="true"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#vueApp',
+
+            data: {},
+            methods: {
+                createUser: function (e) {
+                    var uName = "";
+                    var uMail = "";
+                    var uPassword = "";
+                    uName = document.getElementById("username").value;
+                    uMail = document.getElementById("mail").value;
+                    uPassword = document.getElementById("password").value;
+
+                    if (uName === "" || uMail === "" || uPassword === "" || uName === null || uMail === null || uPassword === null) {
+                        alert("Please fill all the fields");
+                    }
+                    else {
+                        $.ajax({
+                            type: 'GET',
+                            url: '?handler=Submit',
+                            data: { username: uName, email: uMail, password: uPassword },
+                            dataType: 'json',
+                            success: function (data) {
+                                if (data == false) {
+                                    alert("Successfully created new user");
+                                }
+                                else {
+                                    alert("Save faild!");
+                                }
+                            },
+                            error: function (error) {
+                                alert("Error: " + error);
+                            }
+                        })
+                    }
+
+                }
+            }
+        });
+    </script>
 }

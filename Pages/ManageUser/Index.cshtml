@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Manage User</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Create New User</a>
 </p>
 <div id="vueApp" class="row">
     <div class="column">
@@ -28,7 +28,6 @@
                 $.ajax({
                     type: 'GET',
                     url: '?handler=FindUser',
-                    data: { merchantId: 1 },
                     dataType: 'json',
                     success: function (data) {
                         debugger;
@@ -53,21 +52,7 @@
             data: {
 
             }, methods: {
-                //merchantChanged: function (e) {
 
-                //    $.ajax({
-                //        type: 'GET',
-                //        url: '?handler=FindEmail',
-                //        data: { merchantId: 1 },
-                //        dataType: 'json',
-                //        success: function (data) {
-                //            alert(data);
-                //        },
-                //        error: function (error) {
-                //            alert("Error: " + error);
-                //        }
-                //    })
-                //}
             }
         });
     </script>
