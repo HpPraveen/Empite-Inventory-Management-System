@@ -27,9 +27,9 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
         public IActionResult OnGetFindUser(int merchantId)
         {
-            var merchantEmail = _context.MerchantDetails.Where(i => i.MerchantId == merchantId).FirstOrDefault().MerchantEmail;
+            var userDetails = _context.Users.Where(u => u.EmailConfirmed == true).ToList();
 
-            return new JsonResult("ll");
+            return new JsonResult(userDetails);
         }
     }
 }
