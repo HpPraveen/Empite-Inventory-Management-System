@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.Inventory
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;
@@ -19,7 +21,7 @@ namespace InventoryManagementSystem.Pages.Inventory
             _context = context;
         }
 
-        public IList<InventoryDetails> InventoryDetails { get;set; }
+        public IList<InventoryDetails> InventoryDetails { get; set; }
 
         public async Task OnGetAsync()
         {
