@@ -10,6 +10,7 @@ using InventoryManagementSystem.Data.Models;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
+    //[Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;
