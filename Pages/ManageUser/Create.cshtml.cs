@@ -79,8 +79,6 @@ namespace InventoryManagementSystem.Pages.ManageUser
                     PasswordHash = hashPassword,
                 };
 
-                Task.Delay(100000000);
-
                 var userStore = new UserStore<ApplicationUser>(_context);
                 userStore.CreateAsync(user);
 
