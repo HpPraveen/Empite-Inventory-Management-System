@@ -47,9 +47,9 @@
                     </td>
 
                     <td>
-                        <a class="detail" title="Details" asp-page="./Details" asp-route-id="@item.ItemId"><i class="fa fa-asterisk"></i></a> |
-                        <a class="editdt" title="Edit" asp-page="./Edit" asp-route-id="@item.ItemId"><i class="fa fa-pencil"></i></a> |
-                        <a class="deletdt" title="Delete" asp-page="./Delete" asp-route-id="@item.ItemId"><i class="fa fa-trash-o "></i></a>
+                        <a asp-page="./Edit" asp-route-id="@item.ItemId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.ItemId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ItemId">Delete</a>
                     </td>
                 </tr>
             }
