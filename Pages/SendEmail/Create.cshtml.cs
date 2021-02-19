@@ -44,6 +44,8 @@ namespace InventoryManagementSystem.Pages.SendEmail
             var toEmailAddress = Request.Form["toEmail"][0].ToString();
             if (toEmailAddress != "")
             {
+                string[] emails = toEmailAddress.Split(',');
+
                 var merchantName = _context.MerchantDetails.Where(i => i.MerchantId == merchantId).FirstOrDefault().MerchantName.ToString();
                 var inventoryDetailList = _context.InventoryDetails.Where(i => i.MerchantId == merchantId).ToList();
                 await _context.SaveChangesAsync();
@@ -54,16 +56,30 @@ namespace InventoryManagementSystem.Pages.SendEmail
 
                     if (isMailSent == true)
                     {
-                        TempData["SuccessMessage"] = "Successfully sent the mail to " + merchantName + "!";
+                        if (emails.Count() != 1)
+                        {
+                            TempData["SuccessMessage"] = "Mails sent successfully !";
+                        }
+                        else
+                        {
+                            TempData["SuccessMessage"] = "Successfully sent the mail !";
+                        }
                     }
                     else if (isMailSent == false)
                     {
-                        TempData["ErrorMessage"] = "Mail send failed!";
+                        if (emails.Count() != 1)
+                        {
+                            TempData["ErrorMessage"] = "Some of mails send failed!";
+                        }
+                        else
+                        {
+                            TempData["ErrorMessage"] = "Mail send failed!";
+                        }
                     }
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Inventory items are empty !";
+                    TempData["ErrorMessage"] = "Inventory items are empty in selected merchant - " + merchantName + "!";
                 }
             }
             else
@@ -163,28 +179,33 @@ namespace InventoryManagementSystem.Pages.SendEmail
         {
             try
             {
+                string[] emails = toEmail.Split(',');
+
                 MimeMessage message = new MimeMessage();
 
                 MailboxAddress from = new MailboxAddress("Empite", fromMail);
                 message.From.Add(from);
 
-                MailboxAddress to = new MailboxAddress("Merchant", toEmail);
-                message.To.Add(to);
-
-                message.Subject = "Inventory Summary Report";
-
-                BodyBuilder bodyBuilder = new BodyBuilder
+                foreach (string emailaddres in emails)
                 {
-                    HtmlBody = htmlString
-                };
+                    MailboxAddress to = new MailboxAddress("Merchant", emailaddres.Trim());
+                    message.To.Add(to);
 
-                message.Body = bodyBuilder.ToMessageBody();
+                    message.Subject = "Inventory Summary Report";
 
-                SmtpClient client = new SmtpClient();
-                client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate(fromMailUsername, fromMailPassword);
-                client.Send(message);
-                isMailSent = true;
+                    BodyBuilder bodyBuilder = new BodyBuilder
+                    {
+                        HtmlBody = htmlString
+                    };
+
+                    message.Body = bodyBuilder.ToMessageBody();
+
+                    SmtpClient client = new SmtpClient();
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate(fromMailUsername, fromMailPassword);
+                    client.Send(message);
+                    isMailSent = true;
+                }
                 return isMailSent;
             }
             catch (Exception)

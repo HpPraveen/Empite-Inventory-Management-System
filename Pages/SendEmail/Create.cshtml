@@ -17,8 +17,9 @@
                     <select asp-for="MerchantDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName" name="merchant" v-on:change="merchantChanged"></select>
                 </div>
                 <div class="form-group">
-                    <label asp-for="MerchantDetails.MerchantEmail" class="control-label">To Email</label>
-                    <input class="form-control" type="email" id="toEmail" name="toEmail" />
+                    <label asp-for="MerchantDetails.MerchantEmail" class="control-label">To Email/s</label>
+                    @*<input class="form-control" type="email" id="toEmail" name="toEmail" />*@
+                    <textarea class="form-control" id="toEmail" name="toEmail" rows="2" cols="50"></textarea>
                 </div>
 
                 <div class="form-group">

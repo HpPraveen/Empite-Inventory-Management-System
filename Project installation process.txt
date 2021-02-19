@@ -1,0 +1,12 @@
+1) Please follow the link and clone the code
+   1.1) https://github.com/HpPraveen/Empite-Inventory-Management-System
+   1.2) better to use VS-2019
+   1.3) use ms-sql database
+   1.4) change ConnectionStrings in the appsettings.json
+2) use following commands to create database
+   2.1) Add-Migration v0
+   2.2) Update-Database
+3) run the project 
+4) use default admin credentials to login
+   4.1) username = admin@empite.com
+   4.2) password = admin@123
