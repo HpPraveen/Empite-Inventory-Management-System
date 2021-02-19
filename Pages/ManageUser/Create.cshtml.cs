@@ -58,39 +58,8 @@ namespace InventoryManagementSystem.Pages.ManageUser
         {
             try
             {
-                //byte[] salt = new byte[128 / 8];
-                //using (var rng = RandomNumberGenerator.Create())
-                //{
-                //    rng.GetBytes(salt);
-                //}
-
-                //string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                //password: password,
-                //salt: salt,
-                //prf: KeyDerivationPrf.HMACSHA1,
-                //iterationCount: 10000,
-                //numBytesRequested: 256 / 8));
-                //var hashPassword = hashed;
-
                 var user = new IdentityUser { UserName = email, Email = email, EmailConfirmed = true };
                 await _userManager.CreateAsync(user, password);
-                //if (result.Succeeded)
-                //{
-                //}
-
-                //var user = new ApplicationUser
-                //{
-                //    Name = name,
-                //    UserName = email,
-                //    NormalizedUserName = email,
-                //    Email = email,
-                //    NormalizedEmail = email,
-                //    EmailConfirmed = true,
-                //    PasswordHash = password,
-                //};
-
-                //var userStore = new UserStore<ApplicationUser>(_context);
-                //userStore.CreateAsync(user);
 
                 var userRole = new IdentityUserRole<string>
                 {
@@ -102,7 +71,7 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
                 return new JsonResult(true);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new JsonResult(false);
             }
