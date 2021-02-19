@@ -13,6 +13,8 @@ using Microsoft.AspNet.Identity;
 using System.Threading;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text.Encodings.Web;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
@@ -20,9 +22,11 @@ namespace InventoryManagementSystem.Pages.ManageUser
     public class CreateModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
 
-        public CreateModel(InventoryManagementSystem.Data.ApplicationDbContext context)
+        public CreateModel(InventoryManagementSystem.Data.ApplicationDbContext context, Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -50,45 +54,51 @@ namespace InventoryManagementSystem.Pages.ManageUser
             return Page();
         }
 
-        public IActionResult OnGetSubmit(string name, string email, string password, string role)
+        public async Task<IActionResult> OnGetSubmit(string name, string email, string password, string role)
         {
             try
             {
-                byte[] salt = new byte[128 / 8];
-                using (var rng = RandomNumberGenerator.Create())
-                {
-                    rng.GetBytes(salt);
-                }
+                //byte[] salt = new byte[128 / 8];
+                //using (var rng = RandomNumberGenerator.Create())
+                //{
+                //    rng.GetBytes(salt);
+                //}
 
-                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-                var hashPassword = hashed;
+                //string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                //password: password,
+                //salt: salt,
+                //prf: KeyDerivationPrf.HMACSHA1,
+                //iterationCount: 10000,
+                //numBytesRequested: 256 / 8));
+                //var hashPassword = hashed;
 
-                var user = new ApplicationUser
-                {
-                    Name = name,
-                    UserName = email,
-                    NormalizedUserName = email,
-                    Email = email,
-                    NormalizedEmail = email,
-                    EmailConfirmed = true,
-                    PasswordHash = password,
-                };
+                var user = new IdentityUser { UserName = email, Email = email, EmailConfirmed = true };
+                await _userManager.CreateAsync(user, password);
+                //if (result.Succeeded)
+                //{
+                //}
 
-                var userStore = new UserStore<ApplicationUser>(_context);
-                userStore.CreateAsync(user);
+                //var user = new ApplicationUser
+                //{
+                //    Name = name,
+                //    UserName = email,
+                //    NormalizedUserName = email,
+                //    Email = email,
+                //    NormalizedEmail = email,
+                //    EmailConfirmed = true,
+                //    PasswordHash = password,
+                //};
+
+                //var userStore = new UserStore<ApplicationUser>(_context);
+                //userStore.CreateAsync(user);
 
                 var userRole = new IdentityUserRole<string>
                 {
                     RoleId = role,
                     UserId = user.Id
                 };
-                _context.UserRoles.AddAsync(userRole);
-                _context.SaveChangesAsync();
+                await _context.UserRoles.AddAsync(userRole);
+                await _context.SaveChangesAsync();
 
                 return new JsonResult(true);
             }
