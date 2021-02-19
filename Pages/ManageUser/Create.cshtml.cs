@@ -18,7 +18,7 @@ using System.Text.Encodings.Web;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;
