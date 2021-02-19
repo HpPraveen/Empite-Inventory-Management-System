@@ -35,21 +35,6 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
         public IActionResult OnGet()
         {
-            if (!_context.Roles.Any(x => x.Name == "Admin"))
-            {
-                _context.Roles.Add(new IdentityRole("Admin"));
-                _context.SaveChanges();
-            }
-            if (!_context.Roles.Any(x => x.Name == "Manager"))
-            {
-                _context.Roles.Add(new IdentityRole("Manager"));
-                _context.SaveChanges();
-            }
-            if (!_context.Roles.Any(x => x.Name == "User"))
-            {
-                _context.Roles.Add(new IdentityRole("User"));
-                _context.SaveChanges();
-            }
             ViewData["Roles"] = new SelectList(_context.Roles, "Id", "Name");
             return Page();
         }
