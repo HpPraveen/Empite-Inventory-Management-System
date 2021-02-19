@@ -20,11 +20,15 @@ namespace InventoryManagementSystem.Pages.ManageUser
         }
 
         [BindProperty]
-        public IList<ApplicationUser> ApplicationUser { get; set; }
+        public IList<ApplicationUser> DisabledApplicationUser { get; set; }
+
+        [BindProperty]
+        public IList<ApplicationUser> EnabledApplicationUser { get; set; }
 
         public async Task OnGetAsync()
         {
-            ApplicationUser = await _context.Users.Where(i => i.EmailConfirmed == true).ToListAsync();
+            EnabledApplicationUser = await _context.Users.Where(i => i.EmailConfirmed == true).ToListAsync();
+            DisabledApplicationUser = await _context.Users.Where(i => i.EmailConfirmed == false).ToListAsync();
         }
 
         public IActionResult OnGetDisableUser(string userId)
@@ -36,6 +40,26 @@ namespace InventoryManagementSystem.Pages.ManageUser
                 foreach (var user in userDetails)
                 {
                     user.EmailConfirmed = false;
+                    _context.Users.Attach(user).State = EntityState.Modified;
+                    _context.SaveChangesAsync();
+                }
+                return new JsonResult(true);
+            }
+            catch (Exception)
+            {
+                return new JsonResult(false);
+            }
+        }
+
+        public IActionResult OnGetEnableUser(string userId)
+        {
+            try
+            {
+                var userDetails = _context.Users.Where(u => u.Id == userId).ToList();
+
+                foreach (var user in userDetails)
+                {
+                    user.EmailConfirmed = true;
                     _context.Users.Attach(user).State = EntityState.Modified;
                     _context.SaveChangesAsync();
                 }

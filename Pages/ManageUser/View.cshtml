@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.ApplicationUser)
+            @foreach (var item in Model.EnabledApplicationUser)
             {
                 <tr>
                     <td>
@@ -41,6 +41,36 @@
 
                     <td>
                         <input data-user-id="@item.Id" type="submit" value="Disable" class="btn btn-primary" v-on:click="disableUser" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.DisabledApplicationUser)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td>
+                        <input data-user-id="@item.Id" type="submit" value="Unable" class="btn btn-primary" v-on:click="unableUser" />
                     </td>
                 </tr>
             }
@@ -82,6 +112,27 @@
             data: {
 
             }, methods: {
+                unableUser: function (e) {
+                    var uId = e.srcElement.dataset.userId;
+                    $.ajax({
+                        type: 'GET',
+                        url: '?handler=EnableUser',
+                        data: { userId: uId },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data == true) {
+                                location.reload();
+                                alert("Successfully unable the user");
+                            }
+                            else {
+                                alert("User unable faild!");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error: " + error);
+                        }
+                    })
+                },
                 disableUser: function (e) {
                     var uId = e.srcElement.dataset.userId;
                     $.ajax({
