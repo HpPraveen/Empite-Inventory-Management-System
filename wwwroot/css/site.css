@@ -2,70 +2,193 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.border-bottom {
+    border-bottom: 5px solid #7ac91f !important;
+}
+
+.bg-black {
+    background-color: #2f2d2d !important;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(150 229 58);
+}
+
+.creatiem {
+    background-color: #80d41e;
+    padding: 5px 15px;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+    .creatiem:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+.editbtn {
+    background-color: #11cdef;
+    padding: 5px 15px;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+    .editbtn:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+.deletbtn {
+    background-color: #dc3545;
+    padding: 4px 15px;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+    border: 0;
+}
+
+    .deletbtn:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #626460;
+    color: white;
+}
+
+body {
+    background-color: #f8f9fe;
+}
+
+table {
+    box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+}
+
+.cardnw {
+    box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+    background-color: white;
+    padding: 20px 50px;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #11cdef;
+    border-color: #11cdef;
+}
+
+.btn {
+    padding: .375rem 1.2rem;
+    box-shadow: 0 4px 6px rgb(50 50 93 / 11%), 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    font-size: .875rem;
+    font-weight: 600;
+    color: #525f7f;
+    font-family: Open Sans, sans-serif;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #1bc3e1;
+    border-color: #1bc3e1;
+}
+
+.h1, h1 {
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: .5rem;
+    color: #32325d;
+    font-size: 36px;
+    font-family: Open Sans, sans-serif;
+}
+
+.detail {
+}
+
+.editdt {
+    color: #38424C;
+}
+
+.deletdt {
+    color: #DB0E1E;
 }

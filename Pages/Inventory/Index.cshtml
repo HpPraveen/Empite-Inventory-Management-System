@@ -5,52 +5,54 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Inventory Item List</h1>
+<div class="cardnw">
+    <h1>Inventory Item List</h1>
 
-<p>
-    <a asp-page="Create">Create New Item</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Merchant Name
-            </th>
-            <th>
-                Item Name
-            </th>
-            <th>
-                Item Price
-            </th>
-            <th>
-                Item Qty
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.InventoryDetails)
-        {
+    <p>
+        <a class="creatiem" asp-page="Create">Create New Item</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MerchantDetails.MerchantName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ItemName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ItemPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ItemQty)
-                </td>
-
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.ItemId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.ItemId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.ItemId">Delete</a>
-                </td>
+                <th>
+                    Merchant Name
+                </th>
+                <th>
+                    Item Name
+                </th>
+                <th>
+                    Item Price
+                </th>
+                <th>
+                    Item Qty
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.InventoryDetails)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MerchantDetails.MerchantName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemQty)
+                    </td>
+
+                    <td>
+                        <a class="detail" title="Details" asp-page="./Details" asp-route-id="@item.ItemId"><i class="fa fa-asterisk"></i></a> |
+                        <a class="editdt" title="Edit" asp-page="./Edit" asp-route-id="@item.ItemId"><i class="fa fa-pencil"></i></a> |
+                        <a class="deletdt" title="Delete" asp-page="./Delete" asp-route-id="@item.ItemId"><i class="fa fa-trash-o "></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

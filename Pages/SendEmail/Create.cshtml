@@ -4,27 +4,28 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="cardnw">
+    <h1>Send Inventory Mail</h1>
 
-<h1>Send Inventory Mail</h1>
+    <hr />
+    <div id="vueApp" class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="MerchantDetails.MerchantId" class="control-label">Merchant</label>
+                    <select asp-for="MerchantDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName" name="merchant" v-on:change="merchantChanged"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MerchantDetails.MerchantEmail" class="control-label">To Email</label>
+                    <input class="form-control" type="email" id="toEmail" name="toEmail" />
+                </div>
 
-<hr />
-<div id="vueApp" class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="MerchantDetails.MerchantId" class="control-label">Merchant</label>
-                <select asp-for="MerchantDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName" name="merchant" v-on:change="merchantChanged"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="MerchantDetails.MerchantEmail" class="control-label">To Email</label>
-                <input class="form-control" type="email" id="toEmail" name="toEmail" />
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Send" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Send" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 @if (TempData["ErrorMessage"] != null)
@@ -46,12 +47,12 @@
 
             data: {},
             methods: {
-                merchantChanged: function (e) {
-                    var selectedMerchantId = e.target.value;
+                merchantChanged: function () {
+                    var val = 1;
                     $.ajax({
                         type: 'GET',
-                        url: '?handler=FindEmail',
-                        data: { merchantId: selectedMerchantId },
+                        url: '?handler=FindUser',
+                        data: { merchantId: val },
                         dataType: 'json',
                         success: function (data) {
                             document.getElementById('toEmail').value = data;

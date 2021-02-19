@@ -4,45 +4,45 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="cardnw">
+    <h1>Add New Item</h1>
 
-<h1>Add New Item</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="InventoryDetails.MerchantId" class="control-label">Merchant</label>
+                    <select asp-for="InventoryDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InventoryDetails.ItemName" class="control-label">Item Name</label>
+                    <input asp-for="InventoryDetails.ItemName" class="form-control" />
+                    <span asp-validation-for="InventoryDetails.ItemName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InventoryDetails.ItemPrice" class="control-label"> Item Price</label>
+                    <input asp-for="InventoryDetails.ItemPrice" class="form-control" />
+                    <span asp-validation-for="InventoryDetails.ItemPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InventoryDetails.ItemQty" class="control-label">Item Qty</label>
+                    <input asp-for="InventoryDetails.ItemQty" class="form-control" />
+                    <span asp-validation-for="InventoryDetails.ItemQty" class="text-danger"></span>
+                </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="InventoryDetails.MerchantId" class="control-label">Merchant</label>
-                <select asp-for="InventoryDetails.MerchantId" class="form-control" asp-items="ViewBag.MerchantsName"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="InventoryDetails.ItemName" class="control-label">Item Name</label>
-                <input asp-for="InventoryDetails.ItemName" class="form-control" />
-                <span asp-validation-for="InventoryDetails.ItemName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InventoryDetails.ItemPrice" class="control-label"> Item Price</label>
-                <input asp-for="InventoryDetails.ItemPrice" class="form-control" />
-                <span asp-validation-for="InventoryDetails.ItemPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InventoryDetails.ItemQty" class="control-label">Item Qty</label>
-                <input asp-for="InventoryDetails.ItemQty" class="form-control" />
-                <span asp-validation-for="InventoryDetails.ItemQty" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <input type="submit" value="ADD" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <input type="submit" value="ADD" class="btn btn-primary" />
-            </div>
-        </form>
+    <div>
+        <a asp-page="Index" class="creatiem">View All Inventory</a>
     </div>
 </div>
-
-<div>
-    <a asp-page="Index">View All Inventory</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

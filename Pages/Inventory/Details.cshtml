@@ -4,39 +4,40 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="cardnw">
+    <h1>Item Details</h1>
 
-<h1>Item Details</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InventoryDetails.ItemName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InventoryDetails.ItemName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InventoryDetails.ItemPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InventoryDetails.ItemPrice)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InventoryDetails.ItemQty)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InventoryDetails.ItemQty)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InventoryDetails.MerchantDetails)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InventoryDetails.MerchantDetails.MerchantId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.InventoryDetails.ItemId">Edit</a> |
-    <a asp-page="./Index">View All Items</a>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InventoryDetails.ItemName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InventoryDetails.ItemName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InventoryDetails.ItemPrice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InventoryDetails.ItemPrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InventoryDetails.ItemQty)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InventoryDetails.ItemQty)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InventoryDetails.MerchantDetails)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InventoryDetails.MerchantDetails.MerchantId)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a class="editbtn" asp-page="./Edit" asp-route-id="@Model.InventoryDetails.ItemId">Edit</a> |
+        <a class="creatiem" asp-page="./Index">View All Items</a>
+    </div>
 </div>
