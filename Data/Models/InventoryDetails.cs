@@ -12,6 +12,7 @@ namespace InventoryManagementSystem.Data.Models
         [Key]
         public long ItemId { get; set; }
 
+        [Required]
         public string ItemName { get; set; }
 
         [Column(TypeName = "decimal(18, 6)")]
