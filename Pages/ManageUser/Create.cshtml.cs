@@ -29,19 +29,28 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
         public IActionResult OnGet()
         {
+            if (!_context.Roles.Any(x => x.Name == "Admin"))
+            {
+                _context.Roles.Add(new IdentityRole("Admin"));
+                _context.SaveChanges();
+            }
+            if (!_context.Roles.Any(x => x.Name == "Manager"))
+            {
+                _context.Roles.Add(new IdentityRole("Manager"));
+                _context.SaveChanges();
+            }
+            if (!_context.Roles.Any(x => x.Name == "User"))
+            {
+                _context.Roles.Add(new IdentityRole("User"));
+                _context.SaveChanges();
+            }
             ViewData["Roles"] = new SelectList(_context.Roles, "Id", "Name");
             return Page();
         }
 
         public IActionResult OnGetSubmit(string name, string email, string password, string role)
         {
-            //if (_context.Roles.Any(x => x.Name == "Admin"))
-            //{
-            //    _context.Roles.Add(new IdentityRole("Viewer"));
-            //    _context.SaveChanges();
-            //}
-
-            var user = new ApplicationUserDetails
+            var user = new ApplicationUser
             {
                 Name = name,
                 UserName = email,
@@ -54,7 +63,7 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
             Task.Delay(100000000);
 
-            var userStore = new UserStore<IdentityUser>(_context);
+            var userStore = new UserStore<ApplicationUser>(_context);
             userStore.CreateAsync(user);
 
             var userRole = new IdentityUserRole<string>

@@ -11,8 +11,41 @@
 </p>
 <div id="vueApp" class="row">
     <div class="column">
-        <ul style="list-style-type:none;" id="itemList1" class="side-by-side"></ul>
+        <ul style="list-style-type:none;" id="userList" class="side-by-side"></ul>
     </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ApplicationUser)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 @section Scripts {
@@ -25,38 +58,31 @@
             el: '#vueApp',
             beforeMount() {
 
-                $.ajax({
-                    type: 'GET',
-                    url: '?handler=FindUser',
-                    dataType: 'json',
-                    success: function (data) {
-                        debugger;
-                        var noOfUsers = data.length;
-                        for (var userCount = 0; userCount < noOfUsers; userCount++) {
-                            var users = data[userCount];
-                            var username = users.userName;
-                            $("#itemList1").append("<li>" +
-                                "<p class='sc-name'>" + username + "</p>" +
-                                " <input type='submit' value='Disable user' style='background-color:green' class='btn btn - primary' v-on:click='disableUser' />" +
-                                "<hr></li>");
-
-                        }
-
-                    },
-                    error: function (error) {
-                        alert("Error: " + error);
-                    }
-                })
+                //$.ajax({
+                //    type: 'GET',
+                //    url: '?handler=FindUser',
+                //    dataType: 'json',
+                //    success: function (data) {
+                //        var noOfUsers = data.length;
+                //        for (var userCount = 0; userCount < noOfUsers; userCount++) {
+                //            var users = data[userCount];
+                //            var username = users.userName;
+                //            $("#userList").append("<li>" +
+                //                "<p class='sc-name'>" + username + "</p>" +
+                //                " <input type='submit' value='Disable user' style='background-color:green' class='btn btn - primary' />" +
+                //                "<hr></li>");
+                //        }
+                //    },
+                //    error: function (error) {
+                //        alert("Error: " + error);
+                //    }
+                //})
             },
 
             data: {
 
             }, methods: {
-                disableUser: function (e) {
-                    debugger;
-                    var uName = "";
 
-                }
             }
         });
     </script>

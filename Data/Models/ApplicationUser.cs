@@ -2,7 +2,7 @@
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
-    public class ApplicationUserDetails : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [PersonalData]
         public string Name { get; set; }
