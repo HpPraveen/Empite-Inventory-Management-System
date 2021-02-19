@@ -35,7 +35,7 @@
                     </td>
 
                     <td>
-                        <input data-user-id="@item.Id" type="submit" value="Disable" class="btn btn-success" v-on:click="disableUser" />
+                        <input data-user-id="@item.Id" type="submit" value="Disable" class="btn btn-danger" v-on:click="disableUser" />
                     </td>
                 </tr>
             }
@@ -62,7 +62,7 @@
                     </td>
 
                     <td>
-                        <input data-user-id="@item.Id" type="submit" value="Unable" class="btn btn-danger" v-on:click="unableUser" />
+                        <input data-user-id="@item.Id" type="submit" value="Enable" class="btn btn-success" v-on:click="enableUser" />
                     </td>
                 </tr>
             }
@@ -104,7 +104,7 @@
             data: {
 
             }, methods: {
-                unableUser: function (e) {
+                enableUser: function (e) {
                     var uId = e.srcElement.dataset.userId;
                     $.ajax({
                         type: 'GET',
@@ -114,10 +114,10 @@
                         success: function (data) {
                             if (data == true) {
                                 location.reload();
-                                alert("Successfully unable the user");
+                                alert("Successfully enable the user");
                             }
                             else {
-                                alert("User unable faild!");
+                                alert("User enable faild!");
                             }
                         },
                         error: function (error) {
