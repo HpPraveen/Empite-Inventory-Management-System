@@ -48,15 +48,22 @@ namespace InventoryManagementSystem.Pages.SendEmail
                 var inventoryDetailList = _context.InventoryDetails.Where(i => i.MerchantId == merchantId).ToList();
                 await _context.SaveChangesAsync();
 
-                CreateMailBody(toEmailAddress, merchantName, inventoryDetailList);
+                if (inventoryDetailList.Count != 0)
+                {
+                    CreateMailBody(toEmailAddress, merchantName, inventoryDetailList);
 
-                if (isMailSent == true)
-                {
-                    TempData["SuccessMessage"] = "Successfully sent the mail to " + merchantName + "!";
+                    if (isMailSent == true)
+                    {
+                        TempData["SuccessMessage"] = "Successfully sent the mail to " + merchantName + "!";
+                    }
+                    else if (isMailSent == false)
+                    {
+                        TempData["ErrorMessage"] = "Mail send failed!";
+                    }
                 }
-                else if (isMailSent == false)
+                else
                 {
-                    TempData["ErrorMessage"] = "Mail send failed!";
+                    TempData["ErrorMessage"] = "Inventory items are empty !";
                 }
             }
             else

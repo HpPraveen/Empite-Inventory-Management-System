@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InventoryManagementSystem.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -54,6 +55,37 @@ namespace InventoryManagementSystem.Pages
                 await _context.UserRoles.AddAsync(userRole);
                 await _context.SaveChangesAsync();
             }
+
+            if (_context.MerchantDetails.Count() == 0)
+            {
+                var merchantDetails = new MerchantDetails
+                {
+                    MerchantName = "Atlas",
+                    MerchantEmail = "atlas@gmail.com",
+                    MerchantAddress = "Colombo 7"
+                };
+                await _context.MerchantDetails.AddAsync(merchantDetails);
+                await _context.SaveChangesAsync();
+
+                var merchantDetails1 = new MerchantDetails
+                {
+                    MerchantName = "Dell",
+                    MerchantEmail = "dell@gmail.com",
+                    MerchantAddress = "Colombo 1"
+                };
+                await _context.MerchantDetails.AddAsync(merchantDetails1);
+                await _context.SaveChangesAsync();
+
+                var merchantDetails2 = new MerchantDetails
+                {
+                    MerchantName = "Maliban",
+                    MerchantEmail = "maliban@gmail.com",
+                    MerchantAddress = "Colombo 11"
+                };
+                await _context.MerchantDetails.AddAsync(merchantDetails2);
+                await _context.SaveChangesAsync();
+            }
+
             return Page();
         }
     }
