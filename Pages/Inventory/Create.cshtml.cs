@@ -23,6 +23,12 @@ namespace InventoryManagementSystem.Pages.Inventory
 
         public IActionResult OnGet()
         {
+            var merchantDetails = new MerchantDetails
+            {
+                MerchantName = "Atlas pvt",
+                MerchantAddress = "atlas@gmail.com"
+            };
+
             ViewData["MerchantsName"] = new SelectList(_context.MerchantDetails, "MerchantId", "MerchantName");
             ViewData["MerchantsEmail"] = new SelectList(_context.MerchantDetails, "MerchantId", "MerchantEmail");
             return Page();
