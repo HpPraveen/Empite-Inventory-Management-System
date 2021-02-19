@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNet.Identity;
 using System.Threading;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {
@@ -50,33 +52,52 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
         public IActionResult OnGetSubmit(string name, string email, string password, string role)
         {
-            var user = new ApplicationUser
+            try
             {
-                Name = name,
-                UserName = email,
-                NormalizedUserName = email,
-                Email = email,
-                NormalizedEmail = email,
-                EmailConfirmed = true,
-                PasswordHash = password,
-            };
+                byte[] salt = new byte[128 / 8];
+                using (var rng = RandomNumberGenerator.Create())
+                {
+                    rng.GetBytes(salt);
+                }
 
-            Task.Delay(100000000);
+                string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+                var hashPassword = hashed;
 
-            var userStore = new UserStore<ApplicationUser>(_context);
-            userStore.CreateAsync(user);
+                var user = new ApplicationUser
+                {
+                    Name = name,
+                    UserName = email,
+                    NormalizedUserName = email,
+                    Email = email,
+                    NormalizedEmail = email,
+                    EmailConfirmed = true,
+                    PasswordHash = hashPassword,
+                };
 
-            var userRole = new IdentityUserRole<string>
+                Task.Delay(100000000);
+
+                var userStore = new UserStore<ApplicationUser>(_context);
+                userStore.CreateAsync(user);
+
+                var userRole = new IdentityUserRole<string>
+                {
+                    RoleId = role,
+                    UserId = user.Id
+                };
+                _context.UserRoles.AddAsync(userRole);
+                _context.SaveChangesAsync();
+
+                return new JsonResult(true);
+            }
+            catch (Exception)
             {
-                RoleId = role,
-                UserId = user.Id
-            };
-            _context.UserRoles.AddAsync(userRole);
-            _context.SaveChangesAsync();
-
-            bool isSaved = false;
-
-            return new JsonResult(isSaved);
+                return new JsonResult(false);
+            }
         }
     }
 }

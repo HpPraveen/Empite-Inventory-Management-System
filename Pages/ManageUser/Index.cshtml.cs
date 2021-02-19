@@ -31,9 +31,22 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
         public IActionResult OnGetDisableUser(string userId)
         {
-            var userDetails = _context.Users.Where(u => u.Id == userId).ToList();
+            try
+            {
+                var userDetails = _context.Users.Where(u => u.Id == userId).ToList();
 
-            return new JsonResult(userDetails);
+                foreach (var user in userDetails)
+                {
+                    user.EmailConfirmed = false;
+                    _context.Users.Attach(user).State = EntityState.Modified;
+                    _context.SaveChangesAsync();
+                }
+                return new JsonResult(true);
+            }
+            catch (Exception)
+            {
+                return new JsonResult(false);
+            }
         }
     }
 }
