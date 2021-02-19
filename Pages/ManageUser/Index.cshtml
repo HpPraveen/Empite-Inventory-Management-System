@@ -38,9 +38,7 @@
                     </td>
 
                     <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        <input data-user-id="@item.Id" type="submit" value="Disable" class="btn btn-primary" v-on:click="disableUser" />
                     </td>
                 </tr>
             }
@@ -82,7 +80,26 @@
             data: {
 
             }, methods: {
-
+                disableUser: function (e) {
+                    var uId = e.srcElement.dataset.userId;
+                    $.ajax({
+                        type: 'GET',
+                        url: '?handler=DisableUser',
+                        data: { userId: uId },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data == true) {
+                                alert("Successfully diasbled the user");
+                            }
+                            else {
+                                alert("User disable faild!");
+                            }
+                        },
+                        error: function (error) {
+                            alert("Error: " + error);
+                        }
+                    })
+                }
             }
         });
     </script>

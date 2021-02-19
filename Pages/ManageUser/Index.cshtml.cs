@@ -26,12 +26,12 @@ namespace InventoryManagementSystem.Pages.ManageUser
 
         public async Task OnGetAsync()
         {
-            ApplicationUser = await _context.Users.ToListAsync();
+            ApplicationUser = await _context.Users.Where(i => i.EmailConfirmed == true).ToListAsync();
         }
 
-        public IActionResult OnGetFindUser()
+        public IActionResult OnGetDisableUser(string userId)
         {
-            var userDetails = _context.Users.Where(u => u.EmailConfirmed == true).ToList();
+            var userDetails = _context.Users.Where(u => u.Id == userId).ToList();
 
             return new JsonResult(userDetails);
         }
