@@ -8,11 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagementSystem.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext/*<ApplicationUser>*/
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
 
         public DbSet<MerchantDetails> MerchantDetails { get; set; }

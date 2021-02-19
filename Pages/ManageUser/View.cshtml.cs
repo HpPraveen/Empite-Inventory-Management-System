@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using InventoryManagementSystem.Data;
 using InventoryManagementSystem.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace InventoryManagementSystem.Pages.ManageUser
 {  //[Authorize(Roles = "Admin")]
@@ -20,10 +21,10 @@ namespace InventoryManagementSystem.Pages.ManageUser
         }
 
         [BindProperty]
-        public IList<ApplicationUser> DisabledApplicationUser { get; set; }
+        public IList<IdentityUser> DisabledApplicationUser { get; set; }
 
         [BindProperty]
-        public IList<ApplicationUser> EnabledApplicationUser { get; set; }
+        public IList<IdentityUser> EnabledApplicationUser { get; set; }
 
         public async Task OnGetAsync()
         {
