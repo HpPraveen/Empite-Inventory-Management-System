@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.Inventory
 {
-    //[Authorize]
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;

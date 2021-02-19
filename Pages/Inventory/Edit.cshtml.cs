@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace InventoryManagementSystem.Pages.Inventory
 {
-    //[Authorize(Roles = "Admin, Manager")]
+    [Authorize(Roles = "Admin, Manager")]
     public class EditModel : PageModel
     {
         private readonly InventoryManagementSystem.Data.ApplicationDbContext _context;

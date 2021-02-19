@@ -76,7 +76,7 @@ namespace InventoryManagementSystem.Pages.ManageUser
                     Email = email,
                     NormalizedEmail = email,
                     EmailConfirmed = true,
-                    PasswordHash = hashPassword,
+                    PasswordHash = password,
                 };
 
                 var userStore = new UserStore<ApplicationUser>(_context);
