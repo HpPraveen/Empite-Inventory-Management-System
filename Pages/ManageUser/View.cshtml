@@ -9,21 +9,19 @@
 <h1>Manage User</h1>
 
 <p>
-    <a asp-page="Create">Create New User</a>
+    <a class="creatiem" asp-page="Create">Create New User</a>
 </p>
+<br>
 <div id="vueApp" class="row">
-    <div class="column">
-        <ul style="list-style-type:none;" id="userList" class="side-by-side"></ul>
-    </div>
-
+    @*<div class="column">
+            <ul style="list-style-type:none;" id="userList" class="side-by-side"></ul>
+        </div>*@
+    <h3>Active user list</h3>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Name
-                </th>
-                <th>
-                    Email
+                    User
                 </th>
                 <th></th>
             </tr>
@@ -32,28 +30,25 @@
             @foreach (var item in Model.EnabledApplicationUser)
             {
                 <tr>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
 
                     <td>
-                        <input data-user-id="@item.Id" type="submit" value="Disable" class="btn btn-primary" v-on:click="disableUser" />
+                        <input data-user-id="@item.Id" type="submit" value="Disable" class="btn btn-success" v-on:click="disableUser" />
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <br>
+    <hr>
+    <h3>Deactivate user list</h3>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Name
-                </th>
-                <th>
-                    Email
+                    User
                 </th>
                 <th></th>
             </tr>
@@ -62,15 +57,12 @@
             @foreach (var item in Model.DisabledApplicationUser)
             {
                 <tr>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
 
                     <td>
-                        <input data-user-id="@item.Id" type="submit" value="Unable" class="btn btn-primary" v-on:click="unableUser" />
+                        <input data-user-id="@item.Id" type="submit" value="Unable" class="btn btn-danger" v-on:click="unableUser" />
                     </td>
                 </tr>
             }
