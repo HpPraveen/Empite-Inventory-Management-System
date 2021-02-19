@@ -69,10 +69,12 @@ namespace InventoryManagementSystem.Pages.ManageUser
                 await _context.UserRoles.AddAsync(userRole);
                 await _context.SaveChangesAsync();
 
+                TempData["SuccessMessage"] = "Successfully created new user " + email + "!";
                 return new JsonResult(true);
             }
             catch (Exception ex)
             {
+                TempData["ErrorMessage"] = "Save failed!";
                 return new JsonResult(false);
             }
         }
