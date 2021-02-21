@@ -100,7 +100,7 @@ namespace InventoryManagementSystem.Areas.Identity.Pages.Account
                 //}
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt...Please check you login credential");
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! (Incorrect login credential or your account is disabled)");
                     return Page();
                 }
             }
